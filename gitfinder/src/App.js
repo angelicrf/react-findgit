@@ -5,13 +5,15 @@ import Navbar from "./components/layout/Navbar";
 import User from "./components/users/User";
 import axios from 'axios';
 import Search from "./components/users/Search";
+import Alert from './components/layout/Alert';
 
 class App extends Component{
     state = {
         users: [],
-        loading: false
+        loading: false,
+        alert: null
     };
-/*    async componentDidMount() {
+   /* async componentDidMount() {
         console.log('the process is: ', process.env.REACT_APP_GITHUB_CLIENT_SECRET);
         this.setState({
             loading: true
@@ -22,6 +24,10 @@ class App extends Component{
             loading: false
         });
     }*/
+   clearUsers = () => this.setState({
+       users: [],
+       loading : false });
+
     searchUsers = async text => {
         this.setState({
             loading: true
@@ -33,13 +39,24 @@ class App extends Component{
             loading: false
         });
     };
+    setAlert = (msg, type) => {
+       this.setState({
+           alert: {msg, type}
+       })
+    };
+
     render() {
+        const { users, loading } = this.state;
         return (
             <Fragment className="App">
             <Navbar />
+            <Alert alert={this.state.alert}/>
             <div className="container">
-                <Search searchUsers={this.searchUsers}/>
-                <User loading={this.state.loading} users={this.state.users} />
+                <Search searchUsers={this.searchUsers}
+                        clearUsers={this.clearUsers}
+                        showUser={this.state.users.length > 0 ? true :false}
+                        setAlert={this.setAlert}/>
+                <User loading={loading} users={users} />
             </div>
             </Fragment>
         );
