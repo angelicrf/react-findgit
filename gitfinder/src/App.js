@@ -6,6 +6,8 @@ import User from "./components/users/User";
 import axios from 'axios';
 import Search from "./components/users/Search";
 import Alert from './components/layout/Alert';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import About from './components/pages/About';
 
 class App extends Component{
     state = {
@@ -42,23 +44,35 @@ class App extends Component{
     setAlert = (msg, type) => {
        this.setState({
            alert: {msg, type}
-       })
+       });
+       setTimeout(() => this.setState({alert: null}), 5000)
     };
 
     render() {
         const { users, loading } = this.state;
         return (
-            <Fragment className="App">
+            <Router>
+            <div className="App">
             <Navbar />
             <Alert alert={this.state.alert}/>
+                <Switch>
+                    <Route exact path="/" render={props => (
+                        <Fragment>
+                            <Search searchUsers={this.searchUsers}
+                                    clearUsers={this.clearUsers}
+                                    showUser={this.state.users.length > 0 ? true :false}
+                                    setAlert={this.setAlert}/>
+                            <User loading={loading} users={users} />
+                        </Fragment>
+                    )}/>
+
+                    <Route exact path="/about" component={About}/>
+                </Switch>
             <div className="container">
-                <Search searchUsers={this.searchUsers}
-                        clearUsers={this.clearUsers}
-                        showUser={this.state.users.length > 0 ? true :false}
-                        setAlert={this.setAlert}/>
-                <User loading={loading} users={users} />
+
             </div>
-            </Fragment>
+            </div>
+            </Router>
         );
     }
 
