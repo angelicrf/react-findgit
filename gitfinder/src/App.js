@@ -9,15 +9,16 @@ import Alert from './components/layout/Alert';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import About from './components/pages/About';
 import User from './components/users/User';
+import GithubState from "./context/github/GithubState";
 
 class App extends Component{
-    state = {
+/*    state = {
         users: [],
         user: {},
         loading: false,
         repos:[],
         alert: null
-    };
+    };*/
    /* async componentDidMount() {
         console.log('the process is: ', process.env.REACT_APP_GITHUB_CLIENT_SECRET);
         this.setState({
@@ -33,17 +34,7 @@ class App extends Component{
        users: [],
        loading : false });
 
-    searchUsers = async text => {
-        this.setState({
-            loading: true
-        });
-        const result = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
-        &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-        this.setState({
-            users: result.data.items,
-            loading: false
-        });
-    };
+
     setAlert = (msg, type) => {
        this.setState({
            alert: {msg, type}
@@ -75,6 +66,7 @@ class App extends Component{
     render() {
         const { users, loading , user, repos} = this.state;
         return (
+            <GithubState>
             <Router>
             <div className="App">
             <Navbar />
@@ -105,6 +97,7 @@ class App extends Component{
             </div>
             </div>
             </Router>
+            </GithubState>
         );
     }
 

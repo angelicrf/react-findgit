@@ -7,7 +7,9 @@ import Repos from '../repos/Repos';
 const User = ({user, loading, repos, match, getUser, getUserRepos}) => {
     useEffect(() => {
         getUser(match.params.login);
-        getUserRepos(match.params.login);});
+        getUserRepos(match.params.login);
+        // eslint-disable-next-line
+        },[]);
 
         const {name, avatar_url, location, bio, blog,login,html_url,company
         ,followers,following,public_repos,public_gists, hireable} = user;
