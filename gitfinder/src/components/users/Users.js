@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import UserItem from "./UserItem";
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
+
 import GithubContext from "../../context/github/GihhubContext";
 
 const Users = () => {
@@ -21,10 +21,7 @@ const Users = () => {
         );
     }
 };
-Users.prototype = {
-    users: PropTypes.array.isRequered,
-    loading: PropTypes.bool.isRequered
-};
+
 const userStyle = {
     display: 'grid',
     gridTemplateColumns:  'minmax(0, auto) 1fr',
