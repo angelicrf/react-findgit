@@ -1,3 +1,6 @@
+Deployed on Netlify:
+https://youthful-stonebraker-7fe8be.netlify.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
