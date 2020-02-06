@@ -1,11 +1,9 @@
 import React, {useContext} from 'react';
 import UserItem from "./UserItem";
 import Spinner from '../layout/Spinner';
-
 import GithubContext from "../../context/github/GihhubContext";
 
 const Users = () => {
-
     const githubContext = useContext(GithubContext);
     const {users, loading} = githubContext;
 
